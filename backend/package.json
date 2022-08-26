@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc -p ./tsconfig.build.json",
-    "predev": "npm run build",
+    "start": "node build/index.js",
+    "build": "npx tsc",
+    "build:prod": "npx tsc -p ./tsconfig.build.json",
+    "predev": "npm run build:prod",
     "dev": "tsnd --transpile-only --watch \"./src/**\" ./src/index.ts",
     "test": "jest",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
@@ -47,6 +49,8 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mysql2": "^2.3.3",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
     "sequelize": "^6.21.4"
   }
 }
