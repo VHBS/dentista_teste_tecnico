@@ -27,13 +27,7 @@ services:
     volumes:
       - './backend/src:/app/src'
     environment:
-      - PORT=3001
-      - DB_USER=root
-      - DB_PASS=123456
       - DB_HOST=db_mysql
-      - DB_NAME=Destista
-      - DB_PORT=3306
-      - JWT_SECRET=dentista_erica
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3001"]
       timeout: 10s

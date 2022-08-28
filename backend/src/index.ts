@@ -1,14 +1,14 @@
 import express from 'express';
 import 'dotenv/config';
+import cors from 'cors';
 
-const app = express();
-
-// const { PORT, DB_USER, DB_PASS, DB_NAME, DB_PORT, DB_HOST } = process.env;
 const { PORT } = process.env;
 
+const app = express();
+app.use(cors());
 app.use(express.json());
 
-app.get('/teste', (_req, res) => {
+app.get('/teste', async (_req, res) => {
   return res.status(200).json({
     message: 'Estou vivo',
   });
