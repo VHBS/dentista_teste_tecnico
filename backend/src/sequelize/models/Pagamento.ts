@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import db from '.';
+import criarDataFormatadaISO from '../../utils/geradorDeDatas';
 
 class Pagamento extends Model {
   public id: number;
@@ -27,7 +28,7 @@ Pagamento.init(
     },
     data: {
       allowNull: false,
-      defaultValue: DataTypes.NOW,
+      defaultValue: criarDataFormatadaISO(),
       type: DataTypes.DATEONLY,
     },
     valor: {
