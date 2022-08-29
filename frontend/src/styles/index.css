@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+  width: 100vw;
+  background-color: grey;
+}
+
+input:invalid {
+  border: 1px solid red;
+}
+
+input:invalid+span::after {
+  content: '✖';
+}
+
+input:valid+span::after {
+  content: '✓';
+}
