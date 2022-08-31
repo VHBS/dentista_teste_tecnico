@@ -8,8 +8,8 @@ const controllerPagamentoCreate = async (
   next: NextFunction,
 ): Promise<Response<TypePagamento> | void> => {
   try {
-    const { data, valor } = req.body;
-    const result = await servicePagamentoCreate({ data, valor });
+    const { data, valor, parcelas } = req.body;
+    const result = await servicePagamentoCreate({ data, valor, parcelas });
     return res.status(200).json(result);
   } catch (error) {
     return next(error);
