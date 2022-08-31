@@ -18,6 +18,14 @@ module.exports = {
           allowNull: false,
           type: Sequelize.INTEGER,
         },
+        parcela: {
+          allowNull: false,
+          type: Sequelize.INTEGER,
+        },
+        total_de_parcelas: {
+          allowNull: false,
+          type: Sequelize.INTEGER,
+        },
       },
       {
         underscored: true,

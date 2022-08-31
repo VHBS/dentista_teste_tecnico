@@ -7,13 +7,19 @@ class Pagamento extends Model {
 
   public data: string;
 
-  public valor: string;
+  public valor: number;
 
-  get userData() {
+  public parcela: number;
+
+  public totalDeParcelas: number;
+
+  get pagamentoData() {
     return {
       id: this.id,
       data: this.data,
       valor: this.valor,
+      parcela: this.parcela,
+      totalDeParcelas: this.totalDeParcelas,
     };
   }
 }
@@ -34,6 +40,15 @@ Pagamento.init(
     valor: {
       allowNull: false,
       type: DataTypes.INTEGER,
+    },
+    parcela: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    totalDeParcelas: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      field: 'total_de_parcelas',
     },
   },
   {

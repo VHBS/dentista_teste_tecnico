@@ -6,26 +6,28 @@ module.exports = {
         {
           valor: 500,
           data: new Date(),
+          parcela: 1,
+          total_de_parcelas: 2,
+        },
+        {
+          valor: 500,
+          data: new Date(),
+          parcela: 2,
+          total_de_parcelas: 2,
         },
         {
           valor: 700,
           data: new Date(),
+          parcela: 1,
+
+          total_de_parcelas: 2,
         },
         {
           valor: 700,
           data: '2022-08-01',
-        },
-        {
-          valor: 1000,
-          data: '2022-08-02',
-        },
-        {
-          valor: 2000,
-          data: '2022-08-03',
-        },
-        {
-          valor: 3000,
-          data: '2022-08-04',
+          parcela: 2,
+
+          total_de_parcelas: 2,
         },
       ],
       {},
