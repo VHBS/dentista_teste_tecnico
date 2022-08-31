@@ -11,16 +11,16 @@ const servicePagamentoCreate = async ({
   const valorDasParcelas: number = Math.floor(Number(valor) / numeroDeParcelas);
   const restoDasParcelas: number = Number(valor) % numeroDeParcelas;
 
-  const quantidadeDeParcelas = Array.from(new Array(parcelas).keys());
+  const quantidadeDeParcelas = Array.from(new Array(numeroDeParcelas).keys());
 
   const pagamentosParaCadastrar = quantidadeDeParcelas.map((parcela) => {
     const proximaParcela = parcela * 30;
     const dataDaParcela = criarDataFormatadaISO(data, proximaParcela);
     return {
       data: dataDaParcela,
-      valor: parcela === 0 ? valorDasParcelas + restoDasParcelas : valorDasParcelas,
+      valor: parcela === numeroDeParcelas - 1 ? valorDasParcelas + restoDasParcelas : valorDasParcelas,
       parcela: parcela + 1,
-      totalDeParcelas: parcelas,
+      totalDeParcelas: numeroDeParcelas,
     };
   });
 
