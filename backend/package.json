@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prestart": "npm run build",
     "start": "node build/index.js",
-    "build": "npx tsc",
+    "build": "tsc --build tsconfig.json",
     "build:prod": "npx tsc -p ./tsconfig.build.json",
     "predev": "npm run build:prod",
     "dev": "tsnd --transpile-only --watch \"./src/**\" ./src/index.ts",
