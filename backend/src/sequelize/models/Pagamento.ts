@@ -3,15 +3,15 @@ import db from '.';
 import criarDataFormatadaISO from '../../utils/geradorDeDatas';
 
 class Pagamento extends Model {
-  public id: number;
+  private id: number;
 
-  public data: string;
+  private data: string;
 
-  public valor: number;
+  private valor: number;
 
-  public parcela: number;
+  private parcela: number;
 
-  public totalDeParcelas: number;
+  private totalDeParcelas: number;
 
   get pagamentoData() {
     return {
