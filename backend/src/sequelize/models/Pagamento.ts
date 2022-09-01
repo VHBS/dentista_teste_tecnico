@@ -1,17 +1,38 @@
 import { DataTypes, Model } from 'sequelize';
 import db from '.';
 import criarDataFormatadaISO from '../../utils/geradorDeDatas';
+import IPagamento from './interfaces/pagamento';
 
-class Pagamento extends Model {
-  private id: number;
+class Pagamento extends Model implements IPagamento {
+  private _id: number;
 
-  private data: string;
+  private _data: string;
 
-  private valor: number;
+  private _valor: number;
 
-  private parcela: number;
+  private _parcela: number;
 
-  private totalDeParcelas: number;
+  private _totalDeParcelas: number;
+
+  get id() {
+    return this._id;
+  }
+
+  get data() {
+    return this._data;
+  }
+
+  get valor() {
+    return this._valor;
+  }
+
+  get parcela() {
+    return this._parcela;
+  }
+
+  get totalDeParcelas() {
+    return this._totalDeParcelas;
+  }
 
   get pagamentoData() {
     return {
