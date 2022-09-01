@@ -1,18 +1,25 @@
 import { DataTypes, Model } from 'sequelize';
 import db from '.';
+import criarDataFormatadaISO from '../../utils/geradorDeDatas';
 
 class Pagamento extends Model {
-  public id: number;
+  private id: number;
 
-  public data: string;
+  private data: string;
 
-  public valor: string;
+  private valor: number;
 
-  get userData() {
+  private parcela: number;
+
+  private totalDeParcelas: number;
+
+  get pagamentoData() {
     return {
       id: this.id,
       data: this.data,
       valor: this.valor,
+      parcela: this.parcela,
+      totalDeParcelas: this.totalDeParcelas,
     };
   }
 }
@@ -27,12 +34,21 @@ Pagamento.init(
     },
     data: {
       allowNull: false,
-      defaultValue: DataTypes.NOW,
+      defaultValue: criarDataFormatadaISO(),
       type: DataTypes.DATEONLY,
     },
     valor: {
       allowNull: false,
       type: DataTypes.INTEGER,
+    },
+    parcela: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    totalDeParcelas: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      field: 'total_de_parcelas',
     },
   },
   {

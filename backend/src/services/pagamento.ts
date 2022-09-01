@@ -1,23 +1,32 @@
-// import Pagamento from './sequelize/models/Pagamento';
+import { TypePagamentoEntrada, TypePagamentoSaida } from '../@types/pagamento';
+import Pagamento from '../sequelize/models/Pagamento';
+import criarDataFormatadaISO from '../utils/geradorDeDatas';
 
-// try {
-// const result = await Pagamento.findAll();
+const servicePagamentoCreate = async ({
+  data,
+  valor,
+  parcelas,
+}: TypePagamentoEntrada): Promise<TypePagamentoSaida[]> => {
+  const numeroDeParcelas = Number(parcelas);
+  const valorDasParcelas: number = Math.floor(Number(valor) / numeroDeParcelas);
+  const restoDasParcelas: number = Number(valor) % numeroDeParcelas;
 
-//   console.log(result);
-// } catch (error) {
-//   console.log(error);
-// }
-// const result = await Pagamento.create({ valor: 700, data: '2022-08-01' });
-// const result = await Pagamento.findAll({
-//   where: {
-//     data: {
-//       $between: ['2022-08-01', '2022-08-03'],
-//     },
-//   },
-// });
+  const quantidadeDeParcelas = Array.from(new Array(numeroDeParcelas).keys());
 
-// toLocaleDateString('pt-Br', {
-//   day: '2-digit',
-//   month: '2-digit',
-//   year: 'numeric',
-// })
+  const pagamentosParaCadastrar = quantidadeDeParcelas.map((parcela) => {
+    const proximaParcela = parcela * 30;
+    const dataDaParcela = criarDataFormatadaISO(data, proximaParcela);
+    return {
+      data: dataDaParcela,
+      valor: parcela === numeroDeParcelas - 1 ? valorDasParcelas + restoDasParcelas : valorDasParcelas,
+      parcela: parcela + 1,
+      totalDeParcelas: numeroDeParcelas,
+    };
+  });
+
+  const pagamentosCadastrados = await Pagamento.bulkCreate(pagamentosParaCadastrar);
+
+  return pagamentosCadastrados;
+};
+
+export default servicePagamentoCreate;
