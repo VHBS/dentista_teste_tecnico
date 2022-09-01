@@ -1,15 +1,15 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './styles/index.css';
 
-import Formulario from './pages/Formulario';
-import Home from './pages/Home';
+import CadastrarPagamento from './pages/CadastrarPagamento';
+import Inicio from './pages/Inicio';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/pagamento" element={<Formulario />} />
+        <Route path="/" element={<Inicio />} />
+        <Route path="/pagamento" element={<CadastrarPagamento />} />
       </Routes>
     </BrowserRouter>
   );
