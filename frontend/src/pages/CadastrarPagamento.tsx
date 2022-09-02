@@ -6,7 +6,7 @@ import PagamentoCadastrado from '../components/PagamentoCadastrado';
 import { requisicaoCriarPagamento } from '../utils/axios';
 
 export default function CadastrarPagamento() {
-  const [dataValue, setDataValue] = useState<string>('');
+  const [dataValor, setDataValor] = useState<string>('');
   const [parcelas, setParcelas] = useState<number>(1);
   const [valorDoTratamento, setValorDoTratamento] = useState<number>(1);
   const [pagamentosCadastrados, setPagamentosCadastrados] = useState<
@@ -14,25 +14,25 @@ export default function CadastrarPagamento() {
   >([]);
 
   const reiniciarFomulario = (): void => {
-    setDataValue('');
+    setDataValor('');
     setParcelas(1);
     setValorDoTratamento(1);
   };
 
   const verificarInputs = () => {
-    if (!dataValue || !valorDoTratamento) {
+    if (!dataValor || !valorDoTratamento) {
       return false;
     }
     return true;
   };
 
-  const confirmarClique = async (
+  const confirmarCadastro = async (
     event: React.FormEvent<HTMLButtonElement>
   ): Promise<void> => {
     event.preventDefault();
     if (verificarInputs()) {
       const resultApi = await requisicaoCriarPagamento({
-        data: dataValue,
+        data: dataValor,
         parcelas,
         valor: valorDoTratamento * 100,
       });
@@ -45,13 +45,13 @@ export default function CadastrarPagamento() {
   return (
     <div>
       <FormularioCadastrarPagamento
-        dataValue={dataValue}
-        setDataValue={setDataValue}
+        dataValor={dataValor}
+        setDataValor={setDataValor}
         parcelas={parcelas}
         setParcelas={setParcelas}
         valorDoTratamento={valorDoTratamento}
         setValorDoTratamento={setValorDoTratamento}
-        confirmarClique={confirmarClique}
+        confirmarCadastro={confirmarCadastro}
       />
       {pagamentosCadastrados.length > 0 && (
         <PagamentoCadastrado

@@ -56,6 +56,7 @@ export default function PagamentoCadastrado({
                   timeZone: 'UTC',
                 })}
               </p>
+              <p>Parcela: {pagamento.parcela}</p>
               <p>
                 Valor:{' '}
                 {(pagamento.valor / 100).toLocaleString('pt-BR', {
@@ -64,7 +65,6 @@ export default function PagamentoCadastrado({
                   maximumFractionDigits: 2,
                 })}
               </p>
-              <p>Parcela: {pagamento.parcela}</p>
             </div>
           );
         })}
