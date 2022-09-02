@@ -10,6 +10,9 @@ export default function BarraDeNavegacao() {
       <button type="button" onClick={() => navigate('/pagamento')}>
         Cadastrar Pagamento
       </button>
+      <button type="button" onClick={() => navigate('/filtrar-pagamento')}>
+        Filtrar Pagamentos
+      </button>
     </nav>
   );
 }
