@@ -12,4 +12,13 @@ export type TypePagamentoCadastrado = {
   totalDeParcelas: number;
 };
 
+export type TypeFiltroPorDatas = {
+  dataInicial: string;
+  dataFinal: string;
+};
+
+export type TypeRespostaDeErro = {
+  menssagem: string;
+};
+
 export default TypePagamentoEntrada;
