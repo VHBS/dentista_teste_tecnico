@@ -16,7 +16,23 @@ type TypeMensagemDeErro = {
   menssagem: string;
 };
 
+type TypeFiltroPagamentoPorDataEntrada = {
+  dataInicial: string;
+  dataFinal: string;
+};
+
+type TypeFiltroPagamentoPorDataSaída = {
+  status: number;
+  resposta: TypePagamentoSaida[] | TypeMensagemDeErro;
+};
+
 type TypePagamento = TypePagamentoEntrada | TypePagamentoSaida;
 
 export default TypePagamento;
-export { TypeMensagemDeErro, TypePagamentoEntrada, TypePagamentoSaida };
+export {
+  TypeMensagemDeErro,
+  TypePagamentoEntrada,
+  TypePagamentoSaida,
+  TypeFiltroPagamentoPorDataEntrada,
+  TypeFiltroPagamentoPorDataSaída,
+};
