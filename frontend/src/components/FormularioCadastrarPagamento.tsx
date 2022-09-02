@@ -9,7 +9,7 @@ type TypeProps = {
   ) => void;
   confirmarCadastro: (
     evento: React.FormEvent<HTMLButtonElement>
-  ) => Promise<void>;
+  ) => Promise<void | null>;
 };
 
 export default function FormularioCadastrarPagamento({
