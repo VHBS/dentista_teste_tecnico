@@ -2,8 +2,9 @@ import { useState } from 'react';
 
 import { TypePagamentoCadastrado } from '../@types/pagamento';
 import FormularioCadastrarPagamento from '../components/FormularioCadastrarPagamento';
-import PagamentoCadastrado from '../components/PagamentoCadastrado';
+import Pagamentos from '../components/Pagamentos';
 import { requisicaoCriarPagamento } from '../utils/axios';
+import valorDoTotal from '../utils/calculaValorTotal';
 
 export default function CadastrarPagamento() {
   const [dataValor, setDataValor] = useState<string>('');
@@ -12,6 +13,7 @@ export default function CadastrarPagamento() {
   const [pagamentosCadastrados, setPagamentosCadastrados] = useState<
     TypePagamentoCadastrado[]
   >([]);
+  const [mostrarAviso, setMostrarAviso] = useState<boolean>(false);
 
   const reiniciarFomulario = (): void => {
     setDataValor('');
@@ -28,7 +30,7 @@ export default function CadastrarPagamento() {
 
   const confirmarCadastro = async (
     event: React.FormEvent<HTMLButtonElement>
-  ): Promise<void> => {
+  ): Promise<void | null> => {
     event.preventDefault();
     if (verificarInputs()) {
       const resultApi = await requisicaoCriarPagamento({
@@ -39,8 +41,16 @@ export default function CadastrarPagamento() {
       reiniciarFomulario();
       return setPagamentosCadastrados(resultApi);
     }
-    return setPagamentosCadastrados([]);
+    setMostrarAviso(true);
+    setTimeout(() => {
+      setMostrarAviso(false);
+    }, 3000);
+    return null;
   };
+
+  const valorTotalDosPagamentosCadastrados = valorDoTotal(
+    pagamentosCadastrados
+  );
 
   return (
     <div>
@@ -53,11 +63,17 @@ export default function CadastrarPagamento() {
         setValorDoTratamento={setValorDoTratamento}
         confirmarCadastro={confirmarCadastro}
       />
+      {mostrarAviso && <h3>Preencha os campos corretamente</h3>}
       {pagamentosCadastrados.length > 0 && (
-        <PagamentoCadastrado
-          pagamentosCadastrados={pagamentosCadastrados}
-          setPagamentosCadastrados={setPagamentosCadastrados}
-        />
+        <>
+          <h1>Pagamento Cadastrado!</h1>
+          <p>Total: {valorTotalDosPagamentosCadastrados}</p>
+          <p>Parcelas: {pagamentosCadastrados.length}</p>
+          <Pagamentos
+            pagamentosCadastrados={pagamentosCadastrados}
+            setPagamentosCadastrados={setPagamentosCadastrados}
+          />
+        </>
       )}
     </div>
   );
