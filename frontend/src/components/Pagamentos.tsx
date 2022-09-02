@@ -16,24 +16,9 @@ export default function PagamentoCadastrado({
   setPagamentosCadastrados,
 }: TypeProps) {
   const [mostrarDetalhes, setMostrarDetalhes] = useState<boolean>(false);
-  const valorDoTratamento = pagamentosCadastrados.reduce(
-    (acumulador, pagamentoData) => {
-      return acumulador + pagamentoData.valor;
-    },
-    0
-  );
+
   return (
     <div>
-      <h1>Pagamento Cadastrado!</h1>
-      <h3>
-        Total:{' '}
-        {(valorDoTratamento / 100).toLocaleString('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-          maximumFractionDigits: 2,
-        })}
-      </h3>
-      <h3>Parcelas: {pagamentosCadastrados.length}</h3>
       <button
         type="button"
         onClick={() => setMostrarDetalhes(!mostrarDetalhes)}
