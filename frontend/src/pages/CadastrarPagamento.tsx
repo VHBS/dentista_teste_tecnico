@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { TypePagamentoCadastrado } from '../@types/pagamento';
-import Formulario from '../components/Formulario';
+import FormularioCadastrarPagamento from '../components/FormularioCadastrarPagamento';
 import PagamentoCadastrado from '../components/PagamentoCadastrado';
 import { requisicaoCriarPagamento } from '../utils/axios';
 
@@ -44,7 +44,7 @@ export default function CadastrarPagamento() {
 
   return (
     <div>
-      <Formulario
+      <FormularioCadastrarPagamento
         dataValue={dataValue}
         setDataValue={setDataValue}
         parcelas={parcelas}

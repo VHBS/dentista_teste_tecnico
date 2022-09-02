@@ -10,7 +10,7 @@ type TypeProps = {
   confirmarClique: (event: React.FormEvent<HTMLButtonElement>) => Promise<void>;
 };
 
-export default function Formulario({
+export default function FormularioCadastrarPagamento({
   dataValue,
   setDataValue,
   parcelas,
