@@ -1,8 +1,14 @@
-import { TypePagamentoEntrada, TypePagamentoSaida } from '../@types/pagamento';
+import { Op } from 'sequelize';
+import {
+  TypePagamentoEntrada,
+  TypePagamentoSaida,
+  TypeFiltroPagamentoPorDataEntrada,
+  TypeFiltroPagamentoPorDataSaída,
+} from '../@types/pagamento';
 import Pagamento from '../sequelize/models/Pagamento';
 import criarDataFormatadaISO from '../utils/geradorDeDatas';
 
-const servicePagamentoCreate = async ({
+const serviceCriarPagamento = async ({
   data,
   valor,
   parcelas,
@@ -29,4 +35,27 @@ const servicePagamentoCreate = async ({
   return pagamentosCadastrados;
 };
 
-export default servicePagamentoCreate;
+const serviceFiltrarPagamentoPorData = async ({
+  dataInicial,
+  dataFinal,
+}: TypeFiltroPagamentoPorDataEntrada): Promise<TypeFiltroPagamentoPorDataSaída> => {
+  const pagamentosFiltradosPorData = await Pagamento.findAll({
+    where: {
+      data: {
+        [Op.between]: [dataInicial, dataFinal],
+      },
+    },
+  });
+
+  if (pagamentosFiltradosPorData.length === 0)
+    return {
+      status: 404,
+      resposta: { menssagem: 'Nenhum pagamento foi encontrado entre as datas especificadas!' },
+    };
+  return {
+    status: 200,
+    resposta: pagamentosFiltradosPorData,
+  };
+};
+
+export { serviceCriarPagamento, serviceFiltrarPagamentoPorData };
