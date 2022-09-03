@@ -1,12 +1,12 @@
 type TypePagamentoSaida = {
-  id: number;
+  id?: number;
   data: string;
   valor: number;
   parcela: number;
   totalDeParcelas: number;
 };
 
-type TypePagamentoEntrada = {
+type TypeCriarPagamento = {
   data: string;
   valor: string;
   parcelas: string;
@@ -26,12 +26,12 @@ type TypeFiltroPagamentoPorDataSaída = {
   resposta: TypePagamentoSaida[] | TypeMensagemDeErro;
 };
 
-type TypePagamento = TypePagamentoEntrada | TypePagamentoSaida;
+type TypePagamento = TypeCriarPagamento | TypePagamentoSaida;
 
 export default TypePagamento;
 export {
   TypeMensagemDeErro,
-  TypePagamentoEntrada,
+  TypeCriarPagamento,
   TypePagamentoSaida,
   TypeFiltroPagamentoPorDataEntrada,
   TypeFiltroPagamentoPorDataSaída,
