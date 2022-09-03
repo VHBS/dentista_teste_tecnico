@@ -31,27 +31,3 @@ export default class ModelPagamento implements IModelPagamento {
     return pagamentosFiltradosPorData;
   };
 }
-
-// import Pagamento from '../sequelize/models/Pagamento';
-
-// import { TypeFiltroPagamentoPorDataEntrada, TypePagamentoEntrada } from '../@types/pagamento';
-
-// const modelCriarPagamento = async (pagamentosParaCadastrar: TypePagamentoEntrada[]) => {
-//   const pagamentosCadastrados = await Pagamento.bulkCreate(pagamentosParaCadastrar);
-
-//   return pagamentosCadastrados;
-// };
-
-// const modelFiltrarPagamendoPorData = async ({ dataInicial, dataFinal }: TypeFiltroPagamentoPorDataEntrada) => {
-//   const pagamentosFiltradosPorData = Pagamento.findAll({
-//     where: {
-//       data: {
-//         [Op.between]: [dataInicial, dataFinal],
-//       },
-//     },
-//   });
-
-//   return pagamentosFiltradosPorData;
-// };
-
-// export { modelFiltrarPagamendoPorData, modelCriarPagamento };

@@ -58,38 +58,3 @@ export default class ServicePagamento implements IServicePagamento {
     };
   };
 }
-
-// import { Op } from 'sequelize';
-// import {
-//   TypePagamentoEntrada,
-//   TypePagamentoSaida,
-//   TypeFiltroPagamentoPorDataEntrada,
-//   TypeFiltroPagamentoPorDataSaída,
-// } from '../@types/pagamento';
-// import Pagamento from '../sequelize/models/Pagamento';
-// import criarDataFormatadaISO from '../utils/geradorDeDatas';
-
-// const serviceFiltrarPagamentoPorData = async (
-//   { dataInicial, dataFinal }: TypeFiltroPagamentoPorDataEntrada,
-//   pagamento: typeof Pagamento = Pagamento,
-// ): Promise<TypeFiltroPagamentoPorDataSaída> => {
-//   const pagamentosFiltradosPorData = await pagamento.findAll({
-//     where: {
-//       data: {
-//         [Op.between]: [dataInicial, dataFinal],
-//       },
-//     },
-//   });
-
-//   if (pagamentosFiltradosPorData.length === 0)
-//     return {
-//       status: 404,
-//       resposta: { menssagem: 'Nenhum pagamento foi encontrado entre as datas especificadas!' },
-//     };
-//   return {
-//     status: 200,
-//     resposta: pagamentosFiltradosPorData,
-//   };
-// };
-
-// export { serviceCriarPagamento, serviceFiltrarPagamentoPorData };
