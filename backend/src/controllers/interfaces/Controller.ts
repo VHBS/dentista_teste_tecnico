@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
-import { TypeCriarPagamentoSaida } from '../../@types/pagamento';
+import { TypePagamentoSaida } from '../../@types/pagamento';
 
 export interface IControllerPagamento {
-  criarPagamento: (
+  criarPagamento: (req: Request, res: Response, next: NextFunction) => Promise<Response<TypePagamentoSaida[]> | void>;
+  filtrarPagamentoPorData: (
     req: Request,
     res: Response,
     next: NextFunction,
-  ) => Promise<Response<TypeCriarPagamentoSaida[]> | void>;
+  ) => Promise<Response<TypePagamentoSaida[]> | void>;
 }
