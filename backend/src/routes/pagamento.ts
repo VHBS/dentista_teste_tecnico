@@ -6,6 +6,6 @@ const routerPagamento = Router();
 
 routerPagamento.post('/pagamento', middlewareCriarPagamento, controllerPagamento.criarPagamento);
 
-// routerPagamento.get('/filtrar-pagamento', controllerFiltrarPagamentoPorData);
+routerPagamento.get('/pagamento', controllerPagamento.filtrarPagamentoPorData);
 
 export default routerPagamento;
