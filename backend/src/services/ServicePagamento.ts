@@ -1,4 +1,9 @@
-import { TypeCriarPagamento, TypeCriarPagamentoSaida } from '../@types/pagamento';
+import {
+  TypeCriarPagamento,
+  TypeFiltroPagamentoPorDataEntrada,
+  TypeFiltroPagamentoPorDataSaída,
+  TypePagamentoSaida,
+} from '../@types/pagamento';
 import { IModelPagamento } from '../models/interfaces/Model';
 import criarDataFormatadaISO from '../utils/geradorDeDatas';
 import { IServicePagamento } from './interfaces/Service';
@@ -10,7 +15,7 @@ export default class ServicePagamento implements IServicePagamento {
     this._model = model;
   }
 
-  criarPagamento = async ({ data, valor, parcelas }: TypeCriarPagamento): Promise<TypeCriarPagamentoSaida[]> => {
+  public criarPagamento = async ({ data, valor, parcelas }: TypeCriarPagamento): Promise<TypePagamentoSaida[]> => {
     const numeroDeParcelas = Number(parcelas);
     const valorDasParcelas: number = Math.floor(Number(valor) / numeroDeParcelas);
     const restoDasParcelas: number = Number(valor) % numeroDeParcelas;
@@ -32,6 +37,26 @@ export default class ServicePagamento implements IServicePagamento {
 
     return pagamentosCadastrados;
   };
+
+  public filtrarPagamentoPorData = async ({
+    dataInicial,
+    dataFinal,
+  }: TypeFiltroPagamentoPorDataEntrada): Promise<TypeFiltroPagamentoPorDataSaída> => {
+    const pagamentosFiltradosPorData = await this._model.filtrarPagamentoPorData({
+      dataInicial,
+      dataFinal,
+    });
+
+    if (pagamentosFiltradosPorData.length === 0)
+      return {
+        status: 404,
+        resposta: { menssagem: 'Nenhum pagamento foi encontrado entre as datas especificadas!' },
+      };
+    return {
+      status: 200,
+      resposta: pagamentosFiltradosPorData,
+    };
+  };
 }
 
 // import { Op } from 'sequelize';
@@ -43,33 +68,6 @@ export default class ServicePagamento implements IServicePagamento {
 // } from '../@types/pagamento';
 // import Pagamento from '../sequelize/models/Pagamento';
 // import criarDataFormatadaISO from '../utils/geradorDeDatas';
-
-// const serviceCriarPagamento = async ({
-//   data,
-//   valor,
-//   parcelas,
-// }: TypePagamentoEntrada): Promise<TypePagamentoSaida[]> => {
-//   const numeroDeParcelas = Number(parcelas);
-//   const valorDasParcelas: number = Math.floor(Number(valor) / numeroDeParcelas);
-//   const restoDasParcelas: number = Number(valor) % numeroDeParcelas;
-
-//   const quantidadeDeParcelas = Array.from(new Array(numeroDeParcelas).keys());
-
-//   const pagamentosParaCadastrar = quantidadeDeParcelas.map((parcela) => {
-//     const proximaParcela = parcela * 30;
-//     const dataDaParcela = criarDataFormatadaISO(data, proximaParcela);
-//     return {
-//       data: dataDaParcela,
-//       valor: parcela === numeroDeParcelas - 1 ? valorDasParcelas + restoDasParcelas : valorDasParcelas,
-//       parcela: parcela + 1,
-//       totalDeParcelas: numeroDeParcelas,
-//     };
-//   });
-
-//   const pagamentosCadastrados = await Pagamento.bulkCreate(pagamentosParaCadastrar);
-
-//   return pagamentosCadastrados;
-// };
 
 // const serviceFiltrarPagamentoPorData = async (
 //   { dataInicial, dataFinal }: TypeFiltroPagamentoPorDataEntrada,
