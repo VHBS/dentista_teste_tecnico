@@ -24,7 +24,7 @@ const requisicaoFiltrarPagamentosPorData = async (
   params.append('dataInicial', body.dataInicial);
   params.append('dataFinal', body.dataFinal);
 
-  const { data } = await api.get('/filtrar-pagamento', { params });
+  const { data } = await api.get('/pagamento', { params });
 
   return data;
 };
