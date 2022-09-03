@@ -1,4 +1,5 @@
 export default {
+  coveragePathIgnorePatterns: ['node_modules', 'interfaces', 'mock', 'sequelize'],
   bail: false,
   clearMocks: true,
   collectCoverage: true,

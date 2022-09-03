@@ -8,3 +8,4 @@ const servicePagamento = new ServicePagamento(modelPagamento);
 const controllerPagamento = new ControllerPagamento(servicePagamento);
 
 export default controllerPagamento;
+export { modelPagamento, servicePagamento };
