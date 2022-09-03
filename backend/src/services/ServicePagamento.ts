@@ -1,12 +1,12 @@
 import { TypeCriarPagamento, TypeCriarPagamentoSaida } from '../@types/pagamento';
-import { IModel } from '../models/interfaces/Model';
+import { IModelPagamento } from '../models/interfaces/Model';
 import criarDataFormatadaISO from '../utils/geradorDeDatas';
-import { IService } from './interfaces/Service';
+import { IServicePagamento } from './interfaces/Service';
 
-export default class ServicePagamento implements IService {
-  private _model: IModel;
+export default class ServicePagamento implements IServicePagamento {
+  private _model: IModelPagamento;
 
-  constructor(model: IModel) {
+  constructor(model: IModelPagamento) {
     this._model = model;
   }
 

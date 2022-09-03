@@ -1,5 +1,5 @@
 import { TypeCriarPagamentoSaida } from '../../@types/pagamento';
 
-export interface IModel {
+export interface IModelPagamento {
   criarPagamento: (pagamentosParaCadastrar: TypeCriarPagamentoSaida[]) => Promise<TypeCriarPagamentoSaida[]>;
 }

@@ -1,8 +1,8 @@
 import { TypeCriarPagamentoSaida } from '../@types/pagamento';
 import Pagamento from '../sequelize/models/Pagamento';
-import { IModel } from './interfaces/Model';
+import { IModelPagamento } from './interfaces/Model';
 
-export default class ModelPagamento implements IModel {
+export default class ModelPagamento implements IModelPagamento {
   private _db: typeof Pagamento;
 
   constructor(db: typeof Pagamento) {
