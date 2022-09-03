@@ -1,4 +1,4 @@
-type TypeCriarPagamentoSaida = {
+type TypePagamentoSaida = {
   id?: number;
   data: string;
   valor: number;
@@ -23,16 +23,16 @@ type TypeFiltroPagamentoPorDataEntrada = {
 
 type TypeFiltroPagamentoPorDataSaída = {
   status: number;
-  resposta: TypeCriarPagamentoSaida[] | TypeMensagemDeErro;
+  resposta: TypePagamentoSaida[] | TypeMensagemDeErro;
 };
 
-type TypePagamento = TypeCriarPagamento | TypeCriarPagamentoSaida;
+type TypePagamento = TypeCriarPagamento | TypePagamentoSaida;
 
 export default TypePagamento;
 export {
   TypeMensagemDeErro,
   TypeCriarPagamento,
-  TypeCriarPagamentoSaida,
+  TypePagamentoSaida,
   TypeFiltroPagamentoPorDataEntrada,
   TypeFiltroPagamentoPorDataSaída,
 };

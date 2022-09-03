@@ -1,4 +1,5 @@
-import { TypeCriarPagamentoSaida } from '../@types/pagamento';
+import { Op } from 'sequelize';
+import { TypeFiltroPagamentoPorDataEntrada, TypePagamentoSaida } from '../@types/pagamento';
 import Pagamento from '../sequelize/models/Pagamento';
 import { IModelPagamento } from './interfaces/Model';
 
@@ -9,14 +10,28 @@ export default class ModelPagamento implements IModelPagamento {
     this._db = db;
   }
 
-  criarPagamento = async (pagamentosParaCadastrar: TypeCriarPagamentoSaida[]): Promise<TypeCriarPagamentoSaida[]> => {
+  public criarPagamento = async (pagamentosParaCadastrar: TypePagamentoSaida[]): Promise<TypePagamentoSaida[]> => {
     const pagamentosCadastrados = await this._db.bulkCreate(pagamentosParaCadastrar);
 
     return pagamentosCadastrados;
   };
+
+  public filtrarPagamentoPorData = async ({
+    dataInicial,
+    dataFinal,
+  }: TypeFiltroPagamentoPorDataEntrada): Promise<TypePagamentoSaida[]> => {
+    const pagamentosFiltradosPorData = this._db.findAll({
+      where: {
+        data: {
+          [Op.between]: [dataInicial, dataFinal],
+        },
+      },
+    });
+
+    return pagamentosFiltradosPorData;
+  };
 }
 
-// import { Op } from 'sequelize';
 // import Pagamento from '../sequelize/models/Pagamento';
 
 // import { TypeFiltroPagamentoPorDataEntrada, TypePagamentoEntrada } from '../@types/pagamento';
