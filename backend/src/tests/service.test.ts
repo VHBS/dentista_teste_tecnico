@@ -10,6 +10,9 @@ import {
 } from './mocks/pagamento/mocksPagamentos';
 
 describe('Testando a camada Service de Pagamento', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
   it('Pagamento cadastrado com sucesso', async () => {
     jest.spyOn(modelPagamento, 'criarPagamento').mockResolvedValue(mockPagamentosCriados);
 

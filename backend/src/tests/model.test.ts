@@ -7,6 +7,9 @@ import {
 } from './mocks/pagamento/mocksPagamentos';
 
 describe('Testando a camada Model de Pagamento', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
   it('Pagamento cadastrado com sucesso', async () => {
     jest.spyOn(Pagamento, 'bulkCreate').mockResolvedValue(mockPagamentosCriados as Pagamento[]);
     const pagamentosCadastrados = await modelPagamento.criarPagamento(mockPagamentosCriados);
