@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { TypeMensagemDeErro } from '../@types/pagamento';
 
-const middlewarePagamentoCreate = async (
+const middlewareCriarPagamento = async (
   req: Request,
   res: Response,
   next: NextFunction,
@@ -15,4 +15,4 @@ const middlewarePagamentoCreate = async (
   }
 };
 
-export default middlewarePagamentoCreate;
+export default middlewareCriarPagamento;

@@ -1,63 +1,79 @@
 import { useState } from 'react';
 
 import { TypePagamentoCadastrado } from '../@types/pagamento';
-import Formulario from '../components/Formulario';
-import PagamentoCadastrado from '../components/PagamentoCadastrado';
+import FormularioCadastrarPagamento from '../components/FormularioCadastrarPagamento';
+import Pagamentos from '../components/Pagamentos';
 import { requisicaoCriarPagamento } from '../utils/axios';
+import valorDoTotal from '../utils/calculaValorTotal';
 
 export default function CadastrarPagamento() {
-  const [dataValue, setDataValue] = useState<string>('');
+  const [dataValor, setDataValor] = useState<string>('');
   const [parcelas, setParcelas] = useState<number>(1);
   const [valorDoTratamento, setValorDoTratamento] = useState<number>(1);
   const [pagamentosCadastrados, setPagamentosCadastrados] = useState<
     TypePagamentoCadastrado[]
   >([]);
+  const [mostrarAviso, setMostrarAviso] = useState<boolean>(false);
 
   const reiniciarFomulario = (): void => {
-    setDataValue('');
+    setDataValor('');
     setParcelas(1);
     setValorDoTratamento(1);
   };
 
   const verificarInputs = () => {
-    if (!dataValue || !valorDoTratamento) {
+    if (!dataValor || !valorDoTratamento) {
       return false;
     }
     return true;
   };
 
-  const confirmarClique = async (
+  const confirmarCadastro = async (
     event: React.FormEvent<HTMLButtonElement>
-  ): Promise<void> => {
+  ): Promise<void | null> => {
     event.preventDefault();
     if (verificarInputs()) {
       const resultApi = await requisicaoCriarPagamento({
-        data: dataValue,
+        data: dataValor,
         parcelas,
         valor: valorDoTratamento * 100,
       });
       reiniciarFomulario();
       return setPagamentosCadastrados(resultApi);
     }
-    return setPagamentosCadastrados([]);
+    setMostrarAviso(true);
+    setTimeout(() => {
+      setMostrarAviso(false);
+    }, 3000);
+    return null;
   };
+
+  const valorTotalDosPagamentosCadastrados = valorDoTotal(
+    pagamentosCadastrados
+  );
 
   return (
     <div>
-      <Formulario
-        dataValue={dataValue}
-        setDataValue={setDataValue}
+      <FormularioCadastrarPagamento
+        dataValor={dataValor}
+        setDataValor={setDataValor}
         parcelas={parcelas}
         setParcelas={setParcelas}
         valorDoTratamento={valorDoTratamento}
         setValorDoTratamento={setValorDoTratamento}
-        confirmarClique={confirmarClique}
+        confirmarCadastro={confirmarCadastro}
       />
+      {mostrarAviso && <h3>Preencha os campos corretamente</h3>}
       {pagamentosCadastrados.length > 0 && (
-        <PagamentoCadastrado
-          pagamentosCadastrados={pagamentosCadastrados}
-          setPagamentosCadastrados={setPagamentosCadastrados}
-        />
+        <>
+          <h1>Pagamento Cadastrado!</h1>
+          <p>Total: {valorTotalDosPagamentosCadastrados}</p>
+          <p>Parcelas: {pagamentosCadastrados.length}</p>
+          <Pagamentos
+            pagamentosCadastrados={pagamentosCadastrados}
+            setPagamentosCadastrados={setPagamentosCadastrados}
+          />
+        </>
       )}
     </div>
   );

@@ -1,9 +1,11 @@
 import { Router } from 'express';
-import controllerPagamentoCreate from '../controllers/pagamento';
-import middlewarePagamentoCreate from '../middlewares/pagamento';
+import controllerPagamento from '../factory/FactoryPagamento';
+import middlewareCriarPagamento from '../middlewares/pagamento';
 
 const routerPagamento = Router();
 
-routerPagamento.post('/pagamento', middlewarePagamentoCreate, controllerPagamentoCreate);
+routerPagamento.post('/pagamento', middlewareCriarPagamento, controllerPagamento.criarPagamento);
+
+routerPagamento.get('/pagamento', controllerPagamento.filtrarPagamentoPorData);
 
 export default routerPagamento;

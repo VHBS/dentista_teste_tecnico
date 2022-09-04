@@ -1,36 +1,38 @@
-import React from 'react';
-
 type TypeProps = {
-  dataValue: string;
-  setDataValue: (value: string | ((prevVar: string) => string)) => void;
+  dataValor: string;
+  setDataValor: (valor: string | ((valorAnterior: string) => string)) => void;
   parcelas: number;
-  setParcelas: (value: number | ((prevVar: number) => number)) => void;
+  setParcelas: (valor: number | ((valorAnterior: number) => number)) => void;
   valorDoTratamento: number;
-  setValorDoTratamento: (value: number | ((prevVar: number) => number)) => void;
-  confirmarClique: (event: React.FormEvent<HTMLButtonElement>) => Promise<void>;
+  setValorDoTratamento: (
+    valor: number | ((valorAnterior: number) => number)
+  ) => void;
+  confirmarCadastro: (
+    evento: React.FormEvent<HTMLButtonElement>
+  ) => Promise<void | null>;
 };
 
-export default function Formulario({
-  dataValue,
-  setDataValue,
+export default function FormularioCadastrarPagamento({
+  dataValor,
+  setDataValor,
   parcelas,
   setParcelas,
   valorDoTratamento,
   setValorDoTratamento,
-  confirmarClique,
+  confirmarCadastro,
 }: TypeProps) {
   const quantidadeDeParcelas = Array.from(new Array(12).keys());
   return (
     <div>
-      <h1>Cadastrar Pagamento</h1>
+      <h1>Cadastrar pagamento</h1>
       <form>
         <label htmlFor="data-inicial">
           Data Inicial
           <input
             id="data-inicial"
             type="date"
-            onChange={({ target: { value } }) => setDataValue(value)}
-            value={dataValue}
+            onChange={({ target: { value } }) => setDataValor(value)}
+            value={dataValor}
           />
           <span className="validity" />
         </label>
@@ -64,7 +66,7 @@ export default function Formulario({
             }
           />
         </label>
-        <button type="button" onClick={(e) => confirmarClique(e)}>
+        <button type="button" onClick={(e) => confirmarCadastro(e)}>
           Confirmar
         </button>
       </form>
