@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const Nav = styled.nav`
   @media (max-width: 380px) {
+    margin-top: -2em;
+
     height: 6em;
     h3 {
       display: none;
@@ -15,6 +17,7 @@ export const Nav = styled.nav`
     }
   }
   @media (min-width: 380px) and (max-width: 532px) {
+    margin-top: -2em;
     height: 4em;
   }
   height: 2em;
@@ -23,6 +26,7 @@ export const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   background-color: rgba(155, 155, 155, 0.7);
+  margin-top: -2em;
 
   h3 {
     padding: 0 0.5em;
