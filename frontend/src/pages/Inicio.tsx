@@ -1,14 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 
+import { Button } from '../styles/componentesGenericos';
+
 export default function Inicio() {
   const navigate = useNavigate();
   return (
-    <div className="App">
+    <div>
       <h1>Dentista Érica - Softeo</h1>
 
-      <button type="button" onClick={() => navigate('/pagamento')}>
+      <Button type="button" onClick={() => navigate('/pagamento')}>
         Cadastrar Pagamento
-      </button>
+      </Button>
     </div>
   );
 }

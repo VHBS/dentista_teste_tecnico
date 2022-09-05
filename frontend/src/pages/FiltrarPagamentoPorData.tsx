@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { TypePagamentoCadastrado } from '../@types/pagamento';
 import Pagamentos from '../components/Pagamentos';
+import { Button, Input, Label } from '../styles/componentesGenericos';
 import { requisicaoFiltrarPagamentosPorData } from '../utils/axios';
 import valorDoTotal from '../utils/calculaValorTotal';
 
@@ -56,27 +57,27 @@ export default function FiltrarPagamentoPorData() {
       <h1>Filtrar pagamentos por data</h1>
 
       <form>
-        <label htmlFor="data-inicial">
-          <p>A partir da data:</p>
-          <input
+        <Label htmlFor="data-inicial">
+          <span>A partir da data:</span>
+          <Input
             id="data-inicial"
             type="date"
             onChange={({ target: { value } }) => setDataInicial(value)}
             value={dataInicial}
           />
-        </label>
-        <label htmlFor="data-final">
-          <p>Até a data:</p>
-          <input
+        </Label>
+        <Label htmlFor="data-final">
+          <span>Até a data:</span>
+          <Input
             id="data-final"
             type="date"
             onChange={({ target: { value } }) => setDataFinal(value)}
             value={dataFinal}
           />
-        </label>
-        <button type="button" onClick={confirmarFiltroPorDatas}>
+        </Label>
+        <Button type="button" onClick={confirmarFiltroPorDatas}>
           Filtrar
-        </button>
+        </Button>
       </form>
       {mostrarAviso && <h3>Preencha os campos corretamente</h3>}
       {pagamentosFiltrados.length > 0 && (

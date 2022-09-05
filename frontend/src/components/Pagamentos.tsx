@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { TypePagamentoCadastrado } from '../@types/pagamento';
+import { Button } from '../styles/componentesGenericos';
 
 type TypeProps = {
   pagamentosCadastrados: TypePagamentoCadastrado[];
@@ -19,15 +20,15 @@ export default function PagamentoCadastrado({
 
   return (
     <div>
-      <button
+      <Button
         type="button"
         onClick={() => setMostrarDetalhes(!mostrarDetalhes)}
       >
         Mostrar Detalhes
-      </button>
-      <button type="button" onClick={() => setPagamentosCadastrados([])}>
+      </Button>
+      <Button type="button" onClick={() => setPagamentosCadastrados([])}>
         Fechar
-      </button>
+      </Button>
       {mostrarDetalhes &&
         pagamentosCadastrados.map((pagamento) => {
           return (
