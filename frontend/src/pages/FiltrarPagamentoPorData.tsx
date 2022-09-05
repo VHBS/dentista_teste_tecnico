@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { TypePagamentoCadastrado } from '../@types/pagamento';
 import Pagamentos from '../components/Pagamentos';
 import { Button, Input, Label } from '../styles/componentesGenericos';
+import { FormularioCadastrarPagamentoContainer } from '../styles/components/FormularioCadastrarPagamentoContainer';
 import { requisicaoFiltrarPagamentosPorData } from '../utils/axios';
 import valorDoTotal from '../utils/calculaValorTotal';
 
@@ -53,7 +54,7 @@ export default function FiltrarPagamentoPorData() {
   const valorDoTratamento = valorDoTotal(pagamentosFiltrados);
 
   return (
-    <div>
+    <FormularioCadastrarPagamentoContainer>
       <h1>Filtrar pagamentos por data</h1>
 
       <form>
@@ -75,10 +76,10 @@ export default function FiltrarPagamentoPorData() {
             value={dataFinal}
           />
         </Label>
-        <Button type="button" onClick={confirmarFiltroPorDatas}>
-          Filtrar
-        </Button>
       </form>
+      <Button type="button" onClick={confirmarFiltroPorDatas}>
+        Filtrar
+      </Button>
       {mostrarAviso && <h3>Preencha os campos corretamente</h3>}
       {pagamentosFiltrados.length > 0 && (
         <>
@@ -94,6 +95,6 @@ export default function FiltrarPagamentoPorData() {
           />
         </>
       )}
-    </div>
+    </FormularioCadastrarPagamentoContainer>
   );
 }
