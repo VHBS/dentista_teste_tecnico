@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import { Button, Input, Label, Select } from '../styles/componentesGenericos';
+import { Button, Input, Label } from '../styles/componentesGenericos';
+import { FormularioCadastrarPagamentoContainer } from '../styles/components/FormularioCadastrarPagamentoContainer';
 
 type TypeProps = {
   dataValor: string;
@@ -26,7 +26,7 @@ export default function FormularioCadastrarPagamento({
 }: TypeProps) {
   const quantidadeDeParcelas = Array.from(new Array(12).keys());
   return (
-    <div>
+    <FormularioCadastrarPagamentoContainer>
       <h1>Cadastrar pagamento</h1>
       <form>
         <Label htmlFor="data-inicial">
@@ -37,11 +37,10 @@ export default function FormularioCadastrarPagamento({
             onChange={({ target: { value } }) => setDataValor(value)}
             value={dataValor}
           />
-          <span className="validity" />
         </Label>
         <Label htmlFor="parcelas">
-          <span>Quantidade de parcelas: </span>
-          <Select
+          <span>Quantidade de parcelas</span>
+          <select
             name="parcelas"
             id="parcelas"
             value={parcelas}
@@ -55,11 +54,11 @@ export default function FormularioCadastrarPagamento({
                 </option>
               );
             })}
-          </Select>
+          </select>
         </Label>
         <Label htmlFor="valor">
           <span>Valor total do tratamento: </span>
-          <Input
+          <input
             min="1"
             id="valor"
             type="number"
@@ -70,10 +69,10 @@ export default function FormularioCadastrarPagamento({
             }
           />
         </Label>
-        <Button type="button" onClick={(e) => confirmarCadastro(e)}>
-          Confirmar
-        </Button>
       </form>
-    </div>
+      <Button type="button" onClick={(e) => confirmarCadastro(e)}>
+        Confirmar
+      </Button>
+    </FormularioCadastrarPagamentoContainer>
   );
 }

@@ -1,10 +1,27 @@
 import { useState } from 'react';
+import styled from 'styled-components';
 
 import { TypePagamentoCadastrado } from '../@types/pagamento';
 import FormularioCadastrarPagamento from '../components/FormularioCadastrarPagamento';
 import Pagamentos from '../components/Pagamentos';
 import { requisicaoCriarPagamento } from '../utils/axios';
 import valorDoTotal from '../utils/calculaValorTotal';
+
+const CadastrarPagamentoPage = styled.div`
+  @media (max-width: 380px) {
+    padding-top: 6em;
+  }
+
+  @media (min-width: 380px) and (max-width: 532px) {
+    padding-top: 6em;
+  }
+
+  padding-block: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default function CadastrarPagamento() {
   const [dataValor, setDataValor] = useState<string>('');
@@ -53,7 +70,7 @@ export default function CadastrarPagamento() {
   );
 
   return (
-    <div>
+    <CadastrarPagamentoPage>
       <FormularioCadastrarPagamento
         dataValor={dataValor}
         setDataValor={setDataValor}
@@ -75,6 +92,6 @@ export default function CadastrarPagamento() {
           />
         </>
       )}
-    </div>
+    </CadastrarPagamentoPage>
   );
 }

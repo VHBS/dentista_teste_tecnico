@@ -7,7 +7,6 @@ import FiltrarPagamentoPorData from './pages/FiltrarPagamentoPorData';
 import Inicio from './pages/Inicio';
 
 const EstiloGlobal = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
   * {
   margin: 0;
   padding: 0;
@@ -17,7 +16,8 @@ const EstiloGlobal = createGlobalStyle`
 
   body {
   width: 100vw;
-  background-color: #cacaca;
+  background-color: #e2e2e2;
+  padding-block: 2em;
 }
 `;
 
