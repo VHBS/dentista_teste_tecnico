@@ -1,5 +1,5 @@
-import { Button, Input, Label } from '../styles/componentesGenericos';
-import { FormularioCadastrarPagamentoContainer } from '../styles/components/FormularioCadastrarPagamentoContainer';
+import { Button, Input, Label, Select } from '../styles/componentesGenericos';
+import { FormularioComponent } from '../styles/components/FormularioComponent';
 
 type TypeProps = {
   dataValor: string;
@@ -26,7 +26,7 @@ export default function FormularioCadastrarPagamento({
 }: TypeProps) {
   const quantidadeDeParcelas = Array.from(new Array(12).keys());
   return (
-    <FormularioCadastrarPagamentoContainer>
+    <FormularioComponent>
       <h1>Cadastrar pagamento</h1>
       <form>
         <Label htmlFor="data-inicial">
@@ -40,7 +40,7 @@ export default function FormularioCadastrarPagamento({
         </Label>
         <Label htmlFor="parcelas">
           <span>Quantidade de parcelas</span>
-          <select
+          <Select
             name="parcelas"
             id="parcelas"
             value={parcelas}
@@ -54,11 +54,11 @@ export default function FormularioCadastrarPagamento({
                 </option>
               );
             })}
-          </select>
+          </Select>
         </Label>
         <Label htmlFor="valor">
           <span>Valor total do tratamento: </span>
-          <input
+          <Input
             min="1"
             id="valor"
             type="number"
@@ -73,6 +73,6 @@ export default function FormularioCadastrarPagamento({
       <Button type="button" onClick={(e) => confirmarCadastro(e)}>
         Confirmar
       </Button>
-    </FormularioCadastrarPagamentoContainer>
+    </FormularioComponent>
   );
 }

@@ -8,17 +8,16 @@ import Inicio from './pages/Inicio';
 
 const EstiloGlobal = createGlobalStyle`
   * {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-family: 'Fira Sans', sans-serif; 
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Fira Sans', sans-serif; 
   }
 
   body {
-  width: 100vw;
-  background-color: #e2e2e2;
-  padding-block: 2em;
-}
+    width: 100vw;
+    background-color: #e2e2e2;
+  }
 `;
 
 function App() {
