@@ -22,17 +22,20 @@ export const Input = styled.input`
   padding: 0.3em 0.5em;
   box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.05);
   border-radius: 0.2em;
+  width: 8em;
+  text-align: center;
 
   :invalid {
     border: 1px solid red;
   }
 `;
 
-export const Label = styled.label`
-  background-color: pink;
-`;
-
 export const Select = styled.select`
+  padding: 0.3em 0.5em;
   box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.05);
   border-radius: 0.2em;
+  text-align: center;
+  width: 9em;
 `;
+
+export const Label = styled.label``;
