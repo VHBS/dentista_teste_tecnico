@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import { TypePagamentoCadastrado } from '../@types/pagamento';
+import FormularioFiltrarPagamentoPorData from '../components/FormularioFiltrarPagamentoPorData';
 import Pagamentos from '../components/Pagamentos';
-import { Button, Input, Label } from '../styles/componentesGenericos';
-import { FormularioCadastrarPagamentoContainer } from '../styles/components/FormularioCadastrarPagamentoContainer';
+import { FormularioPage } from '../styles/pages/FormularioPage';
 import { requisicaoFiltrarPagamentosPorData } from '../utils/axios';
 import valorDoTotal from '../utils/calculaValorTotal';
 
@@ -54,32 +54,14 @@ export default function FiltrarPagamentoPorData() {
   const valorDoTratamento = valorDoTotal(pagamentosFiltrados);
 
   return (
-    <FormularioCadastrarPagamentoContainer>
-      <h1>Filtrar pagamentos por data</h1>
-
-      <form>
-        <Label htmlFor="data-inicial">
-          <span>A partir da data:</span>
-          <Input
-            id="data-inicial"
-            type="date"
-            onChange={({ target: { value } }) => setDataInicial(value)}
-            value={dataInicial}
-          />
-        </Label>
-        <Label htmlFor="data-final">
-          <span>Até a data:</span>
-          <Input
-            id="data-final"
-            type="date"
-            onChange={({ target: { value } }) => setDataFinal(value)}
-            value={dataFinal}
-          />
-        </Label>
-      </form>
-      <Button type="button" onClick={confirmarFiltroPorDatas}>
-        Filtrar
-      </Button>
+    <FormularioPage>
+      <FormularioFiltrarPagamentoPorData
+        dataInicial={dataInicial}
+        setDataInicial={setDataInicial}
+        dataFinal={dataFinal}
+        setDataFinal={setDataFinal}
+        confirmarFiltroPorDatas={confirmarFiltroPorDatas}
+      />
       {mostrarAviso && <h3>Preencha os campos corretamente</h3>}
       {pagamentosFiltrados.length > 0 && (
         <>
@@ -95,6 +77,6 @@ export default function FiltrarPagamentoPorData() {
           />
         </>
       )}
-    </FormularioCadastrarPagamentoContainer>
+    </FormularioPage>
   );
 }
