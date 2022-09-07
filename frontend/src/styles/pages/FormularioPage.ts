@@ -55,7 +55,7 @@ export const FormularioPage = styled.div`
   .container-pagamentos {
     top: 0;
     position: absolute;
-    background-color: rgba(202, 240, 248);
+    background-color: rgba(219, 245, 250);
     width: 100%;
     min-height: 100vh;
   }
