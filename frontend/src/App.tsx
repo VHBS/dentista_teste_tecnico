@@ -16,7 +16,7 @@ const EstiloGlobal = createGlobalStyle`
 
   body {
     width: 100vw;
-    background-color: #e2e2e2;
+    background-color: rgb(202, 240, 248);
   }
 `;
 

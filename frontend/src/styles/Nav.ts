@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 
 export const Nav = styled.nav`
+  backdrop-filter: blur(0.5em);
+  z-index: 1;
   text-align: center;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(155, 155, 155, 0.7);
+  background-color: rgba(3, 4, 94, 0.7);
   position: fixed;
   margin-top: 0;
+  h3 {
+    color: white;
+  }
   .container {
     display: flex;
   }
