@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { TypePagamentoCadastrado } from '../@types/pagamento';
 import FormularioFiltrarPagamentoPorData from '../components/FormularioFiltrarPagamentoPorData';
 import Pagamentos from '../components/Pagamentos';
+import { Button } from '../styles/componentesGenericos';
 import { FormularioPage } from '../styles/pages/FormularioPage';
 import { requisicaoFiltrarPagamentosPorData } from '../utils/axios';
 import valorDoTotal from '../utils/calculaValorTotal';
@@ -11,7 +12,7 @@ export default function FiltrarPagamentoPorData() {
   const [dataInicial, setDataInicial] = useState<string>('');
   const [dataFinal, setDataFinal] = useState<string>('');
   const [mostrarAviso, setMostrarAviso] = useState<boolean>(false);
-
+  const [mostrarDetalhes, setMostrarDetalhes] = useState<boolean>(false);
   const [pagamentosFiltrados, setPagamentosFiltrados] = useState<
     TypePagamentoCadastrado[]
   >([]);
@@ -64,18 +65,29 @@ export default function FiltrarPagamentoPorData() {
       />
       {mostrarAviso && <h3>Preencha os campos corretamente</h3>}
       {pagamentosFiltrados.length > 0 && (
-        <>
-          <h3>Pagamentos a receber entre:</h3>
-          <p>
-            {dataInicialFormatada} a {dataFinalFormatada}
-          </p>
-          <p>Total a Receber: {valorDoTratamento}</p>
+        <div className="container-pagamentos">
+          <div className="resumo-pagamentos">
+            <h3>Pagamentos a receber entre: </h3>
+            <p>{dataInicialFormatada}</p>
+            <p>a</p>
+            <p>{dataFinalFormatada}</p>
+            <p>Total a Receber: {valorDoTratamento}</p>
+            <Button
+              type="button"
+              onClick={() => setMostrarDetalhes(!mostrarDetalhes)}
+            >
+              Mostrar Detalhes
+            </Button>
+            <Button type="button" onClick={() => setPagamentosFiltrados([])}>
+              Fechar
+            </Button>
+          </div>
 
           <Pagamentos
             pagamentosCadastrados={pagamentosFiltrados}
-            setPagamentosCadastrados={setPagamentosFiltrados}
+            mostrarDetalhes={mostrarDetalhes}
           />
-        </>
+        </div>
       )}
     </FormularioPage>
   );

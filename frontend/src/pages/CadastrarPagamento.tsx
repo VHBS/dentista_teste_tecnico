@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { TypePagamentoCadastrado } from '../@types/pagamento';
 import FormularioCadastrarPagamento from '../components/FormularioCadastrarPagamento';
 import Pagamentos from '../components/Pagamentos';
+import { Button } from '../styles/componentesGenericos';
 import { FormularioPage } from '../styles/pages/FormularioPage';
 import { requisicaoCriarPagamento } from '../utils/axios';
 import valorDoTotal from '../utils/calculaValorTotal';
@@ -11,6 +12,7 @@ export default function CadastrarPagamento() {
   const [dataValor, setDataValor] = useState<string>('');
   const [parcelas, setParcelas] = useState<number>(1);
   const [valorDoTratamento, setValorDoTratamento] = useState<number>(1);
+  const [mostrarDetalhes, setMostrarDetalhes] = useState<boolean>(false);
   const [pagamentosCadastrados, setPagamentosCadastrados] = useState<
     TypePagamentoCadastrado[]
   >([]);
@@ -66,15 +68,26 @@ export default function CadastrarPagamento() {
       />
       {mostrarAviso && <h3>Preencha os campos corretamente</h3>}
       {pagamentosCadastrados.length > 0 && (
-        <>
-          <h1>Pagamento Cadastrado!</h1>
-          <p>Total: {valorTotalDosPagamentosCadastrados}</p>
-          <p>Parcelas: {pagamentosCadastrados.length}</p>
+        <div className="container-pagamentos">
+          <div className="resumo-pagamentos">
+            <h1>Pagamento Cadastrado!</h1>
+            <p>Total: {valorTotalDosPagamentosCadastrados}</p>
+            <p>Parcelas: {pagamentosCadastrados.length}</p>
+            <Button
+              type="button"
+              onClick={() => setMostrarDetalhes(!mostrarDetalhes)}
+            >
+              Mostrar Detalhes
+            </Button>
+            <Button type="button" onClick={() => setPagamentosCadastrados([])}>
+              Fechar
+            </Button>
+          </div>
           <Pagamentos
             pagamentosCadastrados={pagamentosCadastrados}
-            setPagamentosCadastrados={setPagamentosCadastrados}
+            mostrarDetalhes={mostrarDetalhes}
           />
-        </>
+        </div>
       )}
     </FormularioPage>
   );
