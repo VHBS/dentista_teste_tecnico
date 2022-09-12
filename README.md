@@ -6,6 +6,8 @@ Um projeto full stack realizado para um teste técnico.
 
 Este projeto tem o intuito de substituir o caderno de anotações da Dr. Érica por uma aplicação em nuvem para organizar os pagamentos a receber.
 
+Documentação da API: https://documenter.getpostman.com/view/20081559/VVJ11Gsg
+
 ## Tecnologias Utilizadas
 - Front end:
 	- [React](https://pt-br.reactjs.org/)
